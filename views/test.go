@@ -12,8 +12,11 @@ func Multiply(x, y int) int {
 
 func TestTemplatingHandler(w http.ResponseWriter, r *http.Request) {
 
+	fruitArray := []string{"apple", "orange", "mango"}
+
 	uadmin.RenderHTML(w, r, "./templates/index.html", map[string]interface{}{
 		"Title":    "HTML Templating",
 		"Multiply": Multiply,
+		"Fruits":   fruitArray,
 	})
 }

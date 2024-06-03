@@ -6,11 +6,104 @@
   <title>{{ .Title }}</title>  
 </head>
 <body>
-
+  <h1>Note 1: All syntax should be inside a double curly braces</h1>
+  <h1>Note 2: Conditions, range should have an end</h1>
+  <h2>Variable Assignment</h2>
+  <p>Syntax: <strong>$v1 := 5</strong> </p>
   {{ $v1 := 5 }}
   {{ $v2 := 7 }}
-  <!-- Use call to invoke function in HTML templating -->
-  <p>The product of {{ $v1 }} and {{ $v2 }} is {{call .Multiply $v1 $v2}}.</p>
+  <h2>Use call to invoke function in HTML templating from GoLang returned json.</h2>
 
+
+  <p>Syntax: <strong>call .Multiply $v1 $v2</strong></p>
+  <p>The product of {{ $v1 }} and {{ $v2 }} is {{call .Multiply $v1 $v2}}.</p>
+  <!-- end -->
+
+  <h2>Conditional Statement.</h2>
+  <p>If the index is 1 satisfy, else does not.</p>
+  <p>Syntax for if index = 1: <strong>if eq $index 1</strong></p>
+  <ul>
+    {{range $index, $element := .Fruits}}
+        {{if eq $index 1}}
+          <li>{{ $index }}: {{ $element }}: This satisfies the condition</li>
+        {{ else }}
+        <li>{{ $index }}: {{ $element }}: This does not satisfy the condition</li>
+        {{ end }}
+    {{end}}
+  </ul>
+
+  <!-- end -->
+
+  <h2>Used for looping map.</h2>
+  <p>Syntax: <strong>range .Fruits</strong></p>
+  {{ range .Fruits}}
+    <p>{{ . }}</p>
+  {{ end }}
+  <!-- end -->
+
+  <h2>Looping map with index.</h2>
+  <p>Syntax: <strong>range $index, $element := .Fruits</strong></p>
+  {{ range $index, $element := .Fruits}}
+    <p>{{ $index }}: {{ $element }}</p>
+  {{ end }}
+  <!-- end -->
+  
+  <h2>Looking for specific element in map.</h2>
+  <p>Syntax: <strong>if eq $element "orange"</strong></p>
+  {{range $index, $element := .Fruits}}
+  <li>
+    {{if eq $element "orange" }}
+      <strong>{{ $index }}: {{ $element }} (Special)</strong>
+    {{else}}
+      {{ $index }}: {{ $element }}
+    {{end}}
+  </li>
+  {{end}}
+  <!-- end -->
+
+  <h2>Get specific element just by index.</h2> 
+  <p>Syntax: <strong>index .Fruits 2</strong></p>
+  <li>Third element from the FruitList: {{index .Fruits 2}}</li><!-- Starts with 0 -->
+  <!-- end -->
+
+  <h2>Break from loop.</h2>
+  <p>Syntax: <strong>break</strong></p>
+  <ul>
+    {{range $index, $element := .Fruits}}
+        {{if eq $index 1}}
+            {{break}}
+        {{end}}
+        <li>{{ $index }}: {{ $element }}</li>
+    {{end}}
+</ul>
+  <!-- end -->
+
+  <h2>Continue/Skip in loop.</h2>
+  <p>Syntax: <strong>continue</strong></p>
+  <ul>
+    {{range $index, $element := .Fruits}}
+        {{if eq $index 1}}
+            {{continue}}
+        {{end}}
+        <li>{{ $index }}: {{ $element }}</li>
+    {{end}}
+</ul>
+<!-- end -->
+
+
+<h2>Logical Operators Example</h2>
+
+    <h3>Example 1: and Operator</h3>
+    <p>Syntax: <strong>if and true true</strong></p>
+    <p>{{if and true true}}Both conditions are true{{else}}One or both conditions are false{{end}}</p>
+
+    <h3>Example 2: or Operator</h3>
+    <p>Syntax: <strong>if or true false</strong></p>
+    <p>{{if or true false}}At least one condition is true{{else}}Both conditions are false{{end}}</p>
+
+    <h3>Example 3: not Operator</h3>
+    <p>Syntax: <strong>if not false</strong></p>
+    <p>{{if not false}}The condition is not false{{else}}The condition is false{{end}}</p>
+  <!-- end -->
 </body>
 </html>
