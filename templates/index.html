@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ .Title }}</title>  
+</head>
+<body>
+
+  {{ $v1 := 5 }}
+  {{ $v2 := 7 }}
+  <!-- Use call to invoke function in HTML templating -->
+  <p>The product of {{ $v1 }} and {{ $v2 }} is {{call .Multiply $v1 $v2}}.</p>
+
+</body>
+</html>
